@@ -34,10 +34,10 @@ public class TextService {
 
         // Subject is null for SMS text messages
         MessageRecord record = new MessageRecord(
-                "TEXT",
+                "SMS",
                 request.getFrom(),
                 request.getTo(),
-                null,
+                request.getSubject(),
                 request.getBody(),
                 "PENDING"
         );

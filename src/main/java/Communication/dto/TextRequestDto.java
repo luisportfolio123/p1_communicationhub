@@ -17,40 +17,51 @@ public class TextRequestDto {
     @Pattern(regexp = US_PHONE_REGEX, message = "Sender ('from') must be a valid US phone number")
     private String from;
 
+    private String subject;
+
     @NotBlank(message = "Text message body cannot be empty")
     @Size(max = 1600, message = "Text message exceeds maximum character limit of 1600 characters")
     private String body;
 
     public TextRequestDto() {}
 
-    public TextRequestDto(String to, String from, String body) {
+    public TextRequestDto(String to, String from, String subject, String body) {
         this.to = to != null ? to.trim() : null;
         this.from = from != null ? from.trim() : null;
+        this.subject = subject;
         this.body = body;
-    }
-
-    public String getTo() {
-        return to;
     }
 
     public void setTo(String to) {
         this.to = to != null ? to.trim() : null;
     }
 
-    public String getFrom() {
-        return from;
+    public String getTo() {
+        return to;
     }
 
     public void setFrom(String from) {
         this.from = from != null ? from.trim() : null;
     }
 
-    public String getBody() {
-        return body;
+    public String getFrom() {
+        return from;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getSubject() {
+        return subject;
     }
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getBody() {
+        return body;
     }
 
     @Override
@@ -58,6 +69,7 @@ public class TextRequestDto {
         return "TextRequestDto{" +
                 "to='" + to + '\'' +
                 ", from='" + from + '\'' +
+                ", subject='" + subject + '\'' +
                 ", bodyLength=" + (body != null ? body.length() : 0) +
                 '}';
     }

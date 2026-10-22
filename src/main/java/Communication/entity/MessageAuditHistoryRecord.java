@@ -10,6 +10,8 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "message_audit_history")
@@ -17,10 +19,12 @@ public class MessageAuditHistoryRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @JdbcTypeCode(SqlTypes.CHAR)
     @Column(name = "history_id", updatable = false, nullable = false)
     private UUID historyId;
 
     @Column(name = "original_message_id", nullable = false, updatable = false)
+    @JdbcTypeCode(SqlTypes.CHAR)
     private UUID originalMessageId;
 
     @Column(name = "channel_type", nullable = false, updatable = false)

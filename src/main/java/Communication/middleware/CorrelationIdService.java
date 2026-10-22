@@ -1,3 +1,4 @@
+/*
 package com.example.demo.service;//--> Replaced to match our own evironment
 
 import org.slf4j.MDC;
@@ -21,7 +22,7 @@ public class RequestIdService {
     public void attachIdToHTTPRequest(HttpServletRequest request, String requestId){
         /*- Ok so if this function was to get called in a real production by a junior engineer, sould there not be some checks even if it in our code, that
         hey who ever make this call from what every location in order to sucessfully execute this function we are strict and want to ensure you handed us the correct information - typescript
-         */
+
         request.setAttribute(REQUEST_ATTRIBUTE_KEY, requestId);
     }
 
@@ -37,3 +38,4 @@ public class RequestIdService {
     }
 }
 
+*/

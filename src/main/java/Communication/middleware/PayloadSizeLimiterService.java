@@ -1,3 +1,4 @@
+/*
 package com.example.demo.service;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ public class PayloadSizeLimiterService {
      *
      * @param request the incoming HTTP request
      * @return true if the payload is within limits, false if it exceeds the limit
-     */
+
     public boolean isPayloadAllowed(HttpServletRequest request) {
         long contentLength = request.getContentLengthLong();
 
@@ -23,7 +24,7 @@ public class PayloadSizeLimiterService {
         --
         ---> This is where AUTHORIZATION comes into play becuase think about how can we make sure that thsi request can perform an action, 
         even if our service is GENERAL and they have the right to do, weed need some security checks
-                                  */
+
         if (contentLength <= 0) {
             return true;
         }
@@ -39,4 +40,4 @@ public class PayloadSizeLimiterService {
     public long getMaxAllowedBytes() {
         return MAX_ALLOWED_BYTES;
     }
-}
+} */

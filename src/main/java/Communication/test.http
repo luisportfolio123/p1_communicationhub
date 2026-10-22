@@ -1,0 +1,105 @@
+### ========================================================
+### EMAIL FLOW
+### ========================================================
+
+### 1. EMAIL RECORD #1: Create (POST)
+POST http://localhost:8080/v1/email
+Content-Type: application/json
+
+{
+  "to": "client1@example.com",
+  "from": "notifications@example.com",
+  "subject": "Email #1 Initial Notice",
+  "body": "This is the original body for email record 1."
+}
+
+> {%
+    client.global.set("email_id_1", response.body.id);
+%}
+
+### 2. EMAIL RECORD #1: Read (GET)
+GET http://localhost:8080/v1/email/{{email_id_1}}
+
+### 3. EMAIL RECORD #1: Update (PATCH)
+PATCH http://localhost:8080/v1/email/{{email_id_1}}
+Content-Type: application/json
+
+{
+  "body": "This is the updated body for email record 1."
+}
+
+### --------------------------------------------------------
+
+### 4. EMAIL RECORD #2: Create (POST)
+POST http://localhost:8080/v1/email
+Content-Type: application/json
+
+{
+  "to": "client2@example.com",
+  "from": "notifications@example.com",
+  "subject": "Email #2 Deletion Target",
+  "body": "This record will be deleted and archived."
+}
+
+> {%
+    client.global.set("email_id_2", response.body.id);
+%}
+
+### 5. EMAIL RECORD #2: Read (GET)
+GET http://localhost:8080/v1/email/{{email_id_2}}
+
+### 6. EMAIL RECORD #2: Delete & Archive (DELETE)
+DELETE http://localhost:8080/v1/email/{{email_id_2}}
+
+
+### ========================================================
+### TEXT (SMS) FLOW
+### ========================================================
+
+### 7. TEXT RECORD #1: Create (POST)
+POST http://localhost:8080/v1/text
+Content-Type: application/json
+
+{
+  "to": "+13175550101",
+  "from": "+13175550100",
+  "subject": "could this be the issue",
+  "body": "Original SMS text for record 1."
+}
+
+> {%
+    client.global.set("text_id_1", response.body.id);
+%}
+
+### 8. TEXT RECORD #1: Read (GET)
+GET http://localhost:8080/v1/text/{{text_id_1}}
+
+### 9. TEXT RECORD #1: Update (PATCH)
+PATCH http://localhost:8080/v1/text/{{text_id_1}}
+Content-Type: application/json
+
+{
+  "body": "Updated SMS text body for record 1."
+}
+
+### --------------------------------------------------------
+
+### 10. TEXT RECORD #2: Create (POST)
+POST http://localhost:8080/v1/text
+Content-Type: application/json
+
+{
+  "to": "+13175550102",
+  "from": "+13175550100",
+  "body": "SMS text for record 2 to be deleted and archived."
+}
+
+> {%
+    client.global.set("text_id_2", response.body.id);
+%}
+
+### 11. TEXT RECORD #2: Read (GET)
+GET http://localhost:8080/v1/text/{{text_id_2}}
+
+### 12. TEXT RECORD #2: Delete & Archive (DELETE)
+DELETE http://localhost:8080/v1/text/{{text_id_2}}
