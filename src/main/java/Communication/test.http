@@ -103,3 +103,15 @@ GET http://localhost:8080/v1/text/{{text_id_2}}
 
 ### 12. TEXT RECORD #2: Delete & Archive (DELETE)
 DELETE http://localhost:8080/v1/text/{{text_id_2}}
+
+
+### Test String Sanitization via POST
+POST http://localhost:8080/v1/email
+Content-Type: application/json
+
+{
+  "to": "test.sanitizer@example.com",
+  "from": "security@example.com",
+  "subject": "Security Check <script>alert('bad');</script>",
+  "body": "Check this link: javascript:void(0) and clean <script src='hack.js'></script> text."
+}
