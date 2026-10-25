@@ -115,3 +115,51 @@ Content-Type: application/json
   "subject": "Security Check <script>alert('bad');</script>",
   "body": "Check this link: javascript:void(0) and clean <script src='hack.js'></script> text."
 }
+
+
+### ------------------------------------------------------------------- /v3
+### 1. Attempt unauthenticated call (Expect 401 Unauthorized)
+POST http://localhost:8080/v1/email
+Content-Type: application/json
+
+{
+  "to": "client@example.com",
+  "from": "alerts@example.com",
+  "subject": "Blocked Call",
+  "body": "Should fail with 401"
+}
+
+### 2. Generate a valid token
+POST http://localhost:8080/v1/auth/tokens
+Content-Type: application/json
+
+{
+  "clientName": "TestBackendClient"
+}
+
+> {%
+    client.global.set("auth_token", response.body.token);
+%}
+
+### 3. Call endpoint with the generated Bearer Token (Expect 201 Created)
+POST http://localhost:8080/v1/email
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "to": "client@example.com",
+  "from": "alerts@example.com",
+  "subject": "Authorized Call",
+  "body": "Successfully processed with DB-backed bearer token!"
+}
+
+### testing for an error
+POST http://localhost:8080/v1/email
+Content-Type: application/json
+
+{
+  "to": "client@example.com",
+  "from": "alerts@example.com",
+  "subject": "Blocked Call",
+  "body": "Should fail with 401"
+}
